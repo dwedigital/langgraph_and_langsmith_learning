@@ -3,7 +3,7 @@ LangGraph Tutorial - Part 3: Simple Chatbot
 ============================================
 
 This tutorial demonstrates a basic chatbot using LangGraph.
-Note: This requires an OpenAI API key or another LLM provider.
+Note: Uses Ollama's Llama 3.1 for LLM functionality (runs locally).
 """
 
 from typing_extensions import TypedDict, Annotated
@@ -50,11 +50,12 @@ def build_chatbot_graph():
     return graph_builder.compile()
 
 
-# Advanced version with actual LLM (requires API key)
+# Advanced version with actual LLM (uses Ollama)
 def build_llm_chatbot_graph():
     """
-    Build a chatbot graph with actual LLM.
-    Requires OPENAI_API_KEY environment variable.
+    Build a chatbot graph with Ollama's Llama 3.1.
+    Requires Ollama to be running locally with llama3.1 model installed.
+    Install model: ollama pull llama3.1
     """
     try:
         from langchain_ollama import ChatOllama
@@ -89,18 +90,24 @@ def build_llm_chatbot_graph():
 
 
 if __name__ == "__main__":
-    # Check if we have an API key
-    has_api_key = os.getenv("OPENAI_API_KEY") or os.getenv("ANTHROPIC_API_KEY")
+    # Check if Ollama is available (simple check)
+    try:
+        import httpx
+        response = httpx.get("http://localhost:11434/api/tags", timeout=1.0)
+        has_ollama = response.status_code == 200
+    except:
+        has_ollama = False
     
-    if has_api_key:
+    if has_ollama:
         print("=" * 50)
-        print("Building LLM-powered Chatbot")
+        print("Building Ollama Llama 3.1 Chatbot")
         print("=" * 50)
         graph = build_llm_chatbot_graph()
     else:
         print("=" * 50)
-        print("Building Echo Chatbot (no API key found)")
-        print("Set OPENAI_API_KEY or ANTHROPIC_API_KEY for LLM chatbot")
+        print("Building Echo Chatbot (Ollama not detected)")
+        print("Start Ollama: ollama serve")
+        print("Install model: ollama pull llama3.1")
         print("=" * 50)
         graph = build_chatbot_graph()
     

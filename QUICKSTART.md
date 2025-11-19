@@ -61,11 +61,12 @@ This shows:
 
 ### 3. Simple Chatbot
 ```bash
-# Without API key (echo bot)
+# Without Ollama (echo bot)
 uv run python 03_chatbot_example.py
 
-# With API key (real LLM)
-export OPENAI_API_KEY=your_key_here
+# With Ollama running (uses Llama 3.1)
+# Make sure Ollama is running: ollama serve
+# And model is installed: ollama pull llama3.1
 uv run python 03_chatbot_example.py
 ```
 
@@ -183,9 +184,11 @@ graph.add_conditional_edges("node", route_func)  # Conditional
 - Make sure you've run `uv sync` to install dependencies
 - Or use `uv run python script.py` to run scripts in the uv environment
 
-**API errors?**
-- Examples 1, 2, and 4 don't need API keys
-- Example 3 works without API key (echo mode) or with OPENAI_API_KEY/ANTHROPIC_API_KEY
+**LLM errors?**
+- Examples 1, 2, and 4 don't need LLMs
+- Example 3 works without Ollama (echo mode) or with Ollama running locally
+- Make sure Ollama is running: `ollama serve`
+- Make sure llama3.1 is installed: `ollama pull llama3.1`
 
 **Graph visualization not working?**
 - Requires graphviz: `brew install graphviz` (Mac) or `apt-get install graphviz` (Linux)

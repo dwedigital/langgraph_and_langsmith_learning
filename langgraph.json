@@ -15,7 +15,7 @@
     },
     "llm_chatbot": {
       "path": "03_chatbot_example:build_llm_chatbot_graph",
-      "description": "LLM-powered chatbot (requires OPENAI_API_KEY or ANTHROPIC_API_KEY)"
+      "description": "LLM-powered chatbot using Ollama's Llama 3.1 (requires Ollama running locally)"
     },
     "tools_agent": {
       "path": "04_tools_example:build_agent_graph",

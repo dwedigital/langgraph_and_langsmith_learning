@@ -105,8 +105,9 @@ def build_chatbot_graph():
 
 def build_llm_chatbot_graph():
     """
-    Build a chatbot graph with actual LLM and LangSmith tracing.
+    Build a chatbot graph with Ollama's Llama 3.1 and LangSmith tracing.
     This will automatically trace all LLM calls.
+    Requires Ollama to be running locally with llama3.1 model installed.
     """
     try:
         from langchain_ollama import ChatOllama
@@ -215,7 +216,7 @@ def example_custom_trace_metadata():
 
 
 def example_llm_tracing():
-    """Example 3: Tracing LLM calls (requires API key)"""
+    """Example 3: Tracing LLM calls (requires Ollama)"""
     print("\n" + "=" * 60)
     print("Example 3: LLM Call Tracing")
     print("=" * 60)
@@ -226,11 +227,18 @@ def example_llm_tracing():
         print("\n⚠️  Skipping LLM tracing - API key not configured")
         return
     
-    # Check if we have an LLM API key
-    has_openai_key = os.getenv("OPENAI_API_KEY") or os.getenv("ANTHROPIC_API_KEY")
+    # Check if Ollama is available
+    try:
+        import httpx
+        response = httpx.get("http://localhost:11434/api/tags", timeout=1.0)
+        has_ollama = response.status_code == 200
+    except:
+        has_ollama = False
     
-    if not has_openai_key:
-        print("\n⚠️  No LLM API key found (OPENAI_API_KEY or ANTHROPIC_API_KEY)")
+    if not has_ollama:
+        print("\n⚠️  Ollama not detected (not running or not installed)")
+        print("   Start Ollama: ollama serve")
+        print("   Install model: ollama pull llama3.1")
         print("   LLM calls won't work, but tracing setup is shown")
         return
     
@@ -238,7 +246,7 @@ def example_llm_tracing():
     
     config = {
         "run_name": "llm-chatbot-trace",
-        "tags": ["llm", "gpt-4o-mini"]
+        "tags": ["llm", "ollama", "llama3.1"]
     }
     
     with tracing_v2_enabled(client=client):

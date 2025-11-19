@@ -78,11 +78,12 @@ Shows:
 
 **Run it:**
 ```bash
-# With API key (uses real LLM)
-export OPENAI_API_KEY=your_key_here
+# With Ollama running (uses Llama 3.1)
+# Make sure Ollama is running: ollama serve
+# And model is installed: ollama pull llama3.1
 uv run python 03_chatbot_example.py
 
-# Without API key (uses echo bot)
+# Without Ollama (uses echo bot)
 uv run python 03_chatbot_example.py
 ```
 
@@ -176,11 +177,20 @@ uv sync
 
 This will create a virtual environment and install all dependencies from `pyproject.toml`.
 
-3. (Optional) For LLM features, set an API key:
+3. (Optional) For LLM features, set up Ollama:
 ```bash
-export OPENAI_API_KEY=your_key_here
-# or
-export ANTHROPIC_API_KEY=your_key_here
+# Install Ollama (if not already installed)
+# macOS/Linux: curl -fsSL https://ollama.com/install.sh | sh
+# Or visit: https://ollama.com/
+
+# Start Ollama server
+ollama serve
+
+# Pull the Llama 3.1 model
+ollama pull llama3.1
+
+# Verify it works
+ollama run llama3.1 "Hello"
 ```
 
 ## Key LangGraph Patterns
