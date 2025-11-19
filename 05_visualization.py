@@ -211,7 +211,8 @@ if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("Summary")
     print("=" * 60)
-    print("""
+    print(
+        """
 Visualization Options:
 1. Mermaid Text: Always available, great for documentation
 2. PNG Image: Requires system graphviz, best for presentations
@@ -220,4 +221,5 @@ Visualization Options:
 
 For most use cases, the Mermaid text format is sufficient and
 can be embedded directly in Markdown files (GitHub supports it).
-    """)
+    """
+    )

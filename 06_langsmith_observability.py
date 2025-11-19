@@ -309,7 +309,8 @@ if __name__ == "__main__":
     print("\n" + "=" * 60)
     print("Summary")
     print("=" * 60)
-    print("""
+    print(
+        """
 LangSmith Integration Benefits:
 
 1. Automatic Tracing
@@ -342,4 +343,5 @@ Environment Variables:
 - LANGSMITH_API_KEY: Your API key (required)
 - LANGCHAIN_PROJECT: Project name (optional)
 - LANGCHAIN_ENDPOINT: API endpoint (optional, defaults to smith.langchain.com)
-    """)
+    """
+    )
