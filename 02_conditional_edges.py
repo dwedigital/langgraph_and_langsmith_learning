@@ -25,7 +25,7 @@ def start_node(state: State) -> dict:
     print("Executing Start Node")
     return {
         "messages": ["Starting..."],
-        "route": "path_b",  # Change this to "path_b" or "path_c" to see different paths
+        "route": state.get("route", "path_b"),  # Change this to "path_b" or "path_c" to see different paths
         "value": 10
     }
 
@@ -62,7 +62,8 @@ def route_decision(state: State) -> str:
     This function determines which node to go to next.
     It must return a string matching one of the node names.
     """
-    route = state.get("route", "path_b")
+    route = state.get("route")
+    print(f"State: {state}")
     print(f"Routing decision: {route}")
     return route
 
