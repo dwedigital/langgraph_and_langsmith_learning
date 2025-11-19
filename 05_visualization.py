@@ -41,23 +41,18 @@ def route_decision(state: State) -> str:
 def build_example_graph():
     """Build a graph with conditional edges for visualization"""
     graph_builder = StateGraph(State)
-    
+
     graph_builder.add_node("node_a", node_a)
     graph_builder.add_node("node_b", node_b)
     graph_builder.add_node("node_c", node_c)
-    
+
     graph_builder.add_edge(START, "node_a")
     graph_builder.add_conditional_edges(
-        "node_a",
-        route_decision,
-        {
-            "node_b": "node_b",
-            "node_c": "node_c"
-        }
+        "node_a", route_decision, {"node_b": "node_b", "node_c": "node_c"}
     )
     graph_builder.add_edge("node_b", END)
     graph_builder.add_edge("node_c", END)
-    
+
     return graph_builder.compile()
 
 
@@ -86,15 +81,15 @@ def visualize_png_image(graph, filename="graph.png"):
     try:
         graph_structure = graph.get_graph()
         graph_image = graph_structure.draw_mermaid_png()
-        
+
         with open(filename, "wb") as f:
             f.write(graph_image)
-        
+
         print(f"✓ Successfully saved graph as '{filename}'")
         print(f"  File size: {len(graph_image)} bytes")
         return True
     except ImportError as e:
-        print(f"⚠ PNG export requires pygraphviz package")
+        print("⚠ PNG export requires pygraphviz package")
         print(f"  Error: {e}")
         print("\nTo enable PNG export:")
         print("  1. Install system graphviz:")
@@ -108,7 +103,7 @@ def visualize_png_image(graph, filename="graph.png"):
     except Exception as e:
         error_msg = str(e).lower()
         if "graphviz" in error_msg or "dot" in error_msg or "not found" in error_msg:
-            print(f"⚠ System graphviz library not found")
+            print("⚠ System graphviz library not found")
             print(f"  Error: {e}")
             print("\nTo fix this:")
             print("  1. Install system graphviz:")
@@ -148,10 +143,10 @@ def save_mermaid_to_file(graph, filename="graph.mmd"):
     try:
         graph_structure = graph.get_graph()
         mermaid_diagram = graph_structure.draw_mermaid()
-        
+
         with open(filename, "w") as f:
             f.write(mermaid_diagram)
-        
+
         print(f"✓ Saved Mermaid diagram to '{filename}'")
         print("  You can use this in:")
         print("  - GitHub README.md (Mermaid is supported)")
@@ -170,21 +165,21 @@ def print_graph_info(graph):
     print("=" * 60)
     try:
         graph_structure = graph.get_graph()
-        
+
         # Get nodes
         nodes = graph_structure.nodes
         print(f"\nNodes ({len(nodes)}):")
         for node_id in nodes:
             print(f"  - {node_id}")
-        
+
         # Get edges
         edges = graph_structure.edges
         print(f"\nEdges ({len(edges)}):")
         for edge in edges:
-            source = edge.source if hasattr(edge, 'source') else '?'
-            target = edge.target if hasattr(edge, 'target') else '?'
+            source = edge.source if hasattr(edge, "source") else "?"
+            target = edge.target if hasattr(edge, "target") else "?"
             print(f"  - {source} → {target}")
-        
+
     except Exception as e:
         print(f"Error getting graph info: {e}")
 
@@ -192,27 +187,27 @@ def print_graph_info(graph):
 if __name__ == "__main__":
     # Build the example graph
     graph = build_example_graph()
-    
+
     print("LangGraph Visualization Tutorial")
     print("=" * 60)
     print("\nThis script demonstrates multiple ways to visualize your LangGraph.")
     print("Choose the method that works best for your needs.\n")
-    
+
     # Method 1: Mermaid text (always works)
     mermaid_text = visualize_mermaid_text(graph)
-    
+
     # Method 2: PNG image (requires system graphviz)
     visualize_png_image(graph, "example_graph.png")
-    
+
     # Method 3: ASCII art
     visualize_ascii(graph)
-    
+
     # Method 4: Save Mermaid to file
     save_mermaid_to_file(graph, "example_graph.mmd")
-    
+
     # Print graph structure info
     print_graph_info(graph)
-    
+
     print("\n" + "=" * 60)
     print("Summary")
     print("=" * 60)
