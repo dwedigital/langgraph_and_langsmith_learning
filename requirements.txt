@@ -1,0 +1,8 @@
+# This file is kept for backwards compatibility
+# The primary dependency management is now in pyproject.toml
+# Use `uv sync` to install dependencies
+
+langgraph>=0.2.0
+langchain>=0.3.0
+langchain-core>=0.3.0
+langchain-openai>=0.2.0

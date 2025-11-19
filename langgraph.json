@@ -1,0 +1,31 @@
+{
+  "dependencies": ["."],
+  "graphs": {
+    "basic_graph": {
+      "path": "01_basic_graph:build_graph",
+      "description": "Basic graph demonstrating nodes, edges, and state management"
+    },
+    "conditional_graph": {
+      "path": "02_conditional_edges:build_graph",
+      "description": "Graph with conditional routing based on state"
+    },
+    "chatbot": {
+      "path": "03_chatbot_example:build_chatbot_graph",
+      "description": "Simple echo chatbot (no API key required)"
+    },
+    "llm_chatbot": {
+      "path": "03_chatbot_example:build_llm_chatbot_graph",
+      "description": "LLM-powered chatbot (requires OPENAI_API_KEY or ANTHROPIC_API_KEY)"
+    },
+    "tools_agent": {
+      "path": "04_tools_example:build_agent_graph",
+      "description": "Agent with calculator and weather tools"
+    },
+    "observable_chatbot": {
+      "path": "06_langsmith_observability:build_chatbot_graph",
+      "description": "Chatbot with LangSmith observability (requires LANGSMITH_API_KEY)"
+    }
+  },
+  "env": ".env"
+}
+

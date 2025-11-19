@@ -1,0 +1,25 @@
+[project]
+name = "langraph-tutorial"
+version = "0.1.0"
+description = "A comprehensive tutorial on using LangGraph for building stateful AI agents"
+readme = "README.md"
+requires-python = ">=3.11"
+dependencies = [
+    "langgraph>=0.2.0",
+    "langchain>=0.3.0",
+    "langchain-core>=0.3.0",
+    "langchain-openai>=0.2.0",
+    "langchain-ollama>=0.1.0",
+    "langsmith>=0.1.0",
+    "langgraph-cli[inmem]>=0.2.0",
+    "langgraph-api>=0.5.0",
+    "grandalf>=0.8",
+    "python-dotenv>=1.0.0",
+]
+
+[tool.uv]
+dev-dependencies = []
+
+# Optional: pygraphviz for PNG visualization
+# Install system graphviz first: brew install graphviz (macOS) or apt-get install graphviz (Linux)
+# Then install with: uv pip install pygraphviz
